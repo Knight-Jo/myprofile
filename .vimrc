@@ -80,7 +80,7 @@ nnoremap <c-l> <c-w>l
 imap <c-d> <esc>ddi
 
 inoremap jk <esc>
-inoremap <esc> <nop>
+"inoremap <esc> <nop>
 
 "vision mode
 vnoremap <leader>" <esc>'<i"<esc>'>a"<esc>
@@ -100,6 +100,12 @@ set statusline+=\  		" Separator
 set statusline+=%l 		" Current line 
 set statusline+=/ 		" Separator 
 set statusline+=%L 		" Current line
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 " ---------- plugin ----------
 call plug#begin()
